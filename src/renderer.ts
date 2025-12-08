@@ -40,6 +40,7 @@ export class MarkdownRenderer {
 	}
 
 	private initPlugins() {
+		console.time("MarkdownExit: Load Default Plugins");
 		if (this.config.defaultPlugins !== false) {
 			this.md
 				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
@@ -58,46 +59,31 @@ export class MarkdownRenderer {
 				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
 				.use(mathjax3Pro);
 		}
-
+		console.timeEnd("MarkdownExit: Load Default Plugins");
+		console.time("MarkdownExit: Load User Plugins");
 		this.loadUserPlugins();
+		console.timeEnd("MarkdownExit: Load User Plugins");
 	}
 
 	private loadUserPlugins() {
 		const plugins: PluginConfig[] = this.config.plugins || [];
-		const baseDir = this.hexo.base_dir;
-
-		if (!Array.isArray(plugins)) {
-			console.warn("Plugins configuration is not an array. Skipping plugin loading.");
-			return;
-		}
-
-		const userNodeModules = path.join(baseDir, "node_modules");
-
 		for (const pluginConfig of plugins) {
-			let pluginName: string | undefined;
-			let pluginOptions = {};
+			const isString = typeof pluginConfig === "string";
+			const pluginName = isString ? pluginConfig : pluginConfig.name;
+			const pluginOptions = isString ? {} : pluginConfig.options || {};
 
-			if (typeof pluginConfig === "string") {
-				pluginName = pluginConfig;
-			} else if (typeof pluginConfig === "object" && pluginConfig.name) {
-				pluginName = pluginConfig.name;
-				pluginOptions = pluginConfig.options || {};
-			}
-
-			if (pluginName) {
-				try {
-					const pluginPath = path.join(userNodeModules, pluginName);
-					const plugin = require(pluginPath);
-					const pluginFn = plugin.default || plugin;
-					this.md.use(pluginFn, pluginOptions);
-          if (process.env.DEBUG) {
-            console.log(`✅ Successfully loaded plugin: ${pluginName}`);
-          }
-				} catch (e) {
-					console.warn(`⚠️  Failed to load plugin: ${pluginName}`);
-					if (process.env.DEBUG) {
-						console.warn(`   Error: ${e}`);
-					}
+			try {
+				const pluginPath = path.join(this.hexo.base_dir, "node_modules", pluginName);
+				const plugin = require(pluginPath);
+				const pluginFn = plugin.default || plugin;
+				this.md.use(pluginFn, pluginOptions);
+				if (process.env.DEBUG) {
+					console.log(`✅ Successfully loaded plugin: ${pluginName}`);
+				}
+			} catch (e) {
+				console.warn(`⚠️  Failed to load plugin: ${pluginName}`);
+				if (process.env.DEBUG) {
+					console.warn(`   Error: ${e}`);
 				}
 			}
 		}
