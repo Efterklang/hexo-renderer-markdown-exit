@@ -9,11 +9,16 @@
     "markdown",
     "markdown-exit"
   ],
+  "scripts": {
+    "build": "vite build",
+    "fmt": "bunx biome check --write ."
+  },
   "author": "GnixAIj",
   "license": "MIT",
   "dependencies": {
     "@mdit/plugin-tab": "^0.23.0",
     "markdown-exit": "^1.0.0-beta.6",
+    "markdown-exit-inline-code": "^0.0.1",
     "markdown-it-abbr": "^2.0.0",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-emoji": "^3.0.0",
@@ -32,6 +37,7 @@
     "bun-types": "^1.1.18",
     "hexo": "^7.0.0",
     "hexo-util": "^4.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vite": "^7.2.7"
   }
 }
