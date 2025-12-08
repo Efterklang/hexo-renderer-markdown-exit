@@ -37,4 +37,5 @@ just check
 
 ## Know Issues
 
-- [] `abbr` plugin not working
+- [ ] `abbr` plugin not working
+- [ ] hexo custom tags not working
