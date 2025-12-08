@@ -13,6 +13,8 @@ import mathjax3Pro from "markdown-it-mathjax3-pro";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
 import taskLists from "markdown-it-task-lists";
+import renderInlineCode from "markdown-exit-inline-code";
+
 import type { MarkdownExitConfig, PluginConfig } from "../types/types";
 
 export class MarkdownRenderer {
@@ -31,6 +33,11 @@ export class MarkdownRenderer {
 				quotes: "“”‘’",
 				typographer: true,
 				xhtmlOut: false,
+			},
+			inlinecode_options: {
+				themes: {
+					light: "catppuccin-latte"
+				},
 			},
 			...hexo.config.markdown_exit,
 		};
@@ -52,6 +59,7 @@ export class MarkdownRenderer {
 				.use(abbr)
 				.use(ins)
 				.use(taskLists)
+				.use(renderInlineCode, this.config.inlinecode_options)
 				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
 				.use(tab)
 				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch

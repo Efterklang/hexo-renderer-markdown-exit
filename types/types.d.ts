@@ -6,6 +6,7 @@ interface MarkdownExitConfig {
 	defaultPlugins?: boolean;
 	plugins?: PluginConfig[];
 	render_options?: MarkdownExitOptions;
+	inlinecode_options?: InlineCodeOptions;
 	anchor_options?: AnchorOptions;
 	disableNunjucks?: boolean;
 }
