@@ -7,7 +7,7 @@
       "dependencies": {
         "@mdit/plugin-tab": "^0.23.0",
         "markdown-exit": "^1.0.0-beta.6",
-        "markdown-exit-shiki": "^0.1.0",
+        "markdown-exit-shiki": "^0.1.1",
         "markdown-it-abbr": "^2.0.0",
         "markdown-it-anchor": "^9.2.0",
         "markdown-it-emoji": "^3.0.0",
@@ -280,7 +280,7 @@
 
     "markdown-exit": ["markdown-exit@1.0.0-beta.6", "", { "dependencies": { "entities": "^7.0.0", "linkify-it": "^5.0.0", "mdurl": "^2.0.0", "punycode.js": "^2.3.1", "uc.micro": "^2.1.0" } }, "sha512-ZYw/ztUMNkk8yHYV6ythIeGHx3TxTRhXFQD1xZSPX9mwc5N2x7hHW9c4QojfO9ZKaBkioyPVneX9d/Eey8ilww=="],
 
-    "markdown-exit-shiki": ["markdown-exit-shiki@0.1.0", "", { "peerDependencies": { "typescript": "^5" } }, "sha512-EO4Gp0bxki8tgQDa4CNEzp/oP0ZoKqbE17wapjRIuT5Uejxh7JOExveNMxvVUt05IMbuwr83UTW3DeujEOYq2Q=="],
+    "markdown-exit-shiki": ["markdown-exit-shiki@0.1.1", "", { "peerDependencies": { "typescript": "^5" } }, "sha512-Z4ZeTF1AJqjnvxtpZ7NUQmaRKd64/JYpJOPHBKAwLqf6JrFxTa+jhG6WtUxYLF7RIrZq2yDCnvlo2Ujzjmlspw=="],
 
     "markdown-it": ["markdown-it@14.1.0", "", { "dependencies": { "argparse": "^2.0.1", "entities": "^4.4.0", "linkify-it": "^5.0.0", "mdurl": "^2.0.0", "punycode.js": "^2.3.1", "uc.micro": "^2.1.0" }, "bin": { "markdown-it": "bin/markdown-it.mjs" } }, "sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg=="],
 
