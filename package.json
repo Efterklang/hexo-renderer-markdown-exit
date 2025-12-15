@@ -1,6 +1,6 @@
 {
   "name": "hexo-renderer-markdown-exit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Hexo renderer plugin using markdown-exit",
   "main": "dist/index.js",
   "keywords": [
