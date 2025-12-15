@@ -3,6 +3,7 @@ import { tab } from "@mdit/plugin-tab";
 import type Hexo from "hexo";
 import type { StoreFunctionData } from "hexo/dist/extend/renderer";
 import { createMarkdownExit, type MarkdownExit } from "markdown-exit";
+import code from "markdown-exit-shiki";
 import abbr from "markdown-it-abbr";
 import anchor from "markdown-it-anchor";
 import { full as emoji } from "markdown-it-emoji";
@@ -13,7 +14,6 @@ import mathjax3Pro from "markdown-it-mathjax3-pro";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
 import taskLists from "markdown-it-task-lists";
-import renderInlineCode from "markdown-exit-inline-code";
 
 import type { MarkdownExitConfig, PluginConfig } from "../types/types";
 
@@ -34,9 +34,9 @@ export class MarkdownRenderer {
 				typographer: true,
 				xhtmlOut: false,
 			},
-			inlinecode_options: {
+			code_options: {
 				themes: {
-					light: "catppuccin-latte"
+					light: "catppuccin-latte",
 				},
 			},
 			...hexo.config.markdown_exit,
@@ -59,7 +59,7 @@ export class MarkdownRenderer {
 				.use(abbr)
 				.use(ins)
 				.use(taskLists)
-				.use(renderInlineCode, this.config.inlinecode_options)
+				.use(code, this.config.code_options)
 				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
 				.use(tab)
 				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
