@@ -8,6 +8,7 @@ interface MarkdownExitConfig {
 	render_options?: MarkdownExitOptions;
 	code_options?: InlineCodeOptions;
 	anchor_options?: AnchorOptions;
+	mermaid_options?: MermaidOptions;
 	disableNunjucks?: boolean;
 }
 
@@ -30,4 +31,4 @@ interface AnchorOptions {
 	) => void;
 }
 
-export type { MarkdownExitConfig, AnchorOptions, PluginConfig };
+export type { MarkdownExitConfig, AnchorOptions, PluginConfig, MermaidOptions };

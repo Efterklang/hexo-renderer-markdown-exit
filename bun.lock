@@ -7,6 +7,7 @@
       "dependencies": {
         "@mdit/plugin-tab": "^0.23.0",
         "markdown-exit": "^1.0.0-beta.6",
+        "markdown-exit-mermaid": "^1.0.1",
         "markdown-exit-shiki": "^0.1.4",
         "markdown-it-abbr": "^2.0.0",
         "markdown-it-anchor": "^9.2.0",
@@ -323,6 +324,8 @@
     "lower-case": ["lower-case@2.0.2", "", { "dependencies": { "tslib": "^2.0.3" } }, "sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg=="],
 
     "markdown-exit": ["markdown-exit@1.0.0-beta.6", "", { "dependencies": { "entities": "^7.0.0", "linkify-it": "^5.0.0", "mdurl": "^2.0.0", "punycode.js": "^2.3.1", "uc.micro": "^2.1.0" } }, "sha512-ZYw/ztUMNkk8yHYV6ythIeGHx3TxTRhXFQD1xZSPX9mwc5N2x7hHW9c4QojfO9ZKaBkioyPVneX9d/Eey8ilww=="],
+
+    "markdown-exit-mermaid": ["markdown-exit-mermaid@1.0.1", "", { "peerDependencies": { "markdown-exit": "^1.0.0-beta.6" } }, "sha512-skIIztlk6vgYQ+0ErYKQGoObMjbeIrHlJcEIk/ECkAYSpJXgPAv5MUucnxdUbE80xiqdDKYvKjP5zFyPz3P0ng=="],
 
     "markdown-exit-shiki": ["markdown-exit-shiki@0.1.4", "", { "peerDependencies": { "@shikijs/colorized-brackets": "^3.20.0", "@shikijs/transformers": "^3.20.0", "markdown-exit": "^1.0.0-beta.6", "shiki": "^3.19.0" } }, "sha512-g88K3Xo9QzbLYMKeNxH41XEADFUKwMCVfMWua6OeW1j2s+Qm3tB5VMv5gdy9l7YSacEpWoNVImKNkeqLVARVxw=="],
 

@@ -14,8 +14,9 @@ import mathjax3Pro from "markdown-it-mathjax3-pro";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
 import taskLists from "markdown-it-task-lists";
+import mermaidDiagram from "markdown-exit-mermaid";
 
-import type { MarkdownExitConfig, PluginConfig } from "../types/types";
+import type { MarkdownExitConfig, PluginConfig} from "../types/types";
 
 export class MarkdownRenderer {
 	private hexo: Hexo;
@@ -39,6 +40,9 @@ export class MarkdownRenderer {
 					light: "catppuccin-latte",
 				},
 			},
+			mermaid_options: {
+				theme: "default",
+			},
 			...hexo.config.markdown_exit,
 		};
 
@@ -60,6 +64,7 @@ export class MarkdownRenderer {
 				.use(ins)
 				.use(taskLists)
 				.use(code, this.config.code_options)
+				.use(mermaidDiagram, this.config.mermaid_options)
 				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
 				.use(tab)
 				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
