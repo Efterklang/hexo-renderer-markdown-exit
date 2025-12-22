@@ -29,8 +29,8 @@
         "vite": "^7.2.7",
       },
       "peerDependencies": {
-        "hexo": "^7.0.0",
-        "hexo-util": "^4.0.0",
+        "hexo": ">=7.0.0",
+        "hexo-util": ">=4.0.0",
       },
     },
   },

@@ -1,6 +1,6 @@
 {
   "name": "hexo-renderer-markdown-exit",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A Hexo renderer plugin using markdown-exit",
   "main": "dist/index.js",
   "keywords": [
@@ -44,7 +44,7 @@
     "vite": "^7.2.7"
   },
   "peerDependencies": {
-    "hexo": "^7.0.0",
-    "hexo-util": "^4.0.0"
+    "hexo": ">=7.0.0",
+    "hexo-util": ">=4.0.0"
   }
 }
