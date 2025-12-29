@@ -13,29 +13,16 @@ markdown_exit:
     typographer: true
     quotes: "“”‘’"
   plugins:
-    - markdown-it-obsidian-callouts
-    - name: markdown-it-inline-code
+    - name: markdown-it-obsidian-callouts
+    - name: "markdown-exit-image"
       options:
-        themes:
-          light: catppuccin-latte
-          dark: catppuccin-mocha
-          nord: nord
-          tokyo: tokyo-night
+        supported_domains: ["assets.example.com"]
+        cache_path: ./thumbcache.json
   disableNunjucks: false
-```
-
-## Development
-
-```shell
-# install dependencies
-bun i
-# build the project
-just build
-# after modifying the code, run lint
-just check
 ```
 
 ## Know Issues
 
-- [ ] `abbr` plugin not working
-- [ ] hexo custom tags not working
+- Markdown content in "hexo custom tags"[^1] is not processed correctly.
+
+[^1]: https://hexo.io/docs/tag-plugins

@@ -3,6 +3,7 @@ import { tab } from "@mdit/plugin-tab";
 import type Hexo from "hexo";
 import type { StoreFunctionData } from "hexo/dist/extend/renderer";
 import { createMarkdownExit, type MarkdownExit } from "markdown-exit";
+import mermaidDiagram from "markdown-exit-mermaid";
 import code from "markdown-exit-shiki";
 import abbr from "markdown-it-abbr";
 import anchor from "markdown-it-anchor";
@@ -14,9 +15,8 @@ import mathjax3Pro from "markdown-it-mathjax3-pro";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
 import taskLists from "markdown-it-task-lists";
-import mermaidDiagram from "markdown-exit-mermaid";
 
-import type { MarkdownExitConfig, PluginConfig} from "../types/types";
+import type { MarkdownExitConfig, PluginConfig } from "../types/types";
 
 export class MarkdownRenderer {
 	private hexo: Hexo;
@@ -78,6 +78,30 @@ export class MarkdownRenderer {
 		console.timeEnd("MarkdownExit: Load User Plugins");
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: 懒得写
+	private resolvePluginFunction(plugin: any) {
+		// 1. 优先尝试默认导出
+		if (typeof plugin.default === "function") {
+			return plugin.default;
+		}
+
+		// 2. 如果是函数，直接返回
+		if (typeof plugin === "function") {
+			return plugin;
+		}
+
+		// 3. 如果都没找到，返回第一个函数属性
+		if (typeof plugin === "object" && plugin !== null) {
+			for (const key in plugin) {
+				if (typeof plugin[key] === "function") {
+					return plugin[key];
+				}
+			}
+		}
+
+		return plugin;
+	}
+
 	private loadUserPlugins() {
 		const plugins: PluginConfig[] = this.config.plugins || [];
 		for (const pluginConfig of plugins) {
@@ -88,7 +112,8 @@ export class MarkdownRenderer {
 			try {
 				const pluginPath = path.join(this.hexo.base_dir, "node_modules", pluginName);
 				const plugin = require(pluginPath);
-				const pluginFn = plugin.default || plugin;
+				const pluginFn = this.resolvePluginFunction(plugin);
+
 				this.md.use(pluginFn, pluginOptions);
 				if (process.env.DEBUG) {
 					console.log(`✅ Successfully loaded plugin: ${pluginName}`);
