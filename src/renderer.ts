@@ -67,8 +67,13 @@ export class MarkdownRenderer {
 				.use(mermaidDiagram, this.config.mermaid_options)
 				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
 				.use(tab)
-				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
-				.use(anchor, this.config.anchor_options)
+				.use(
+					// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
+					anchor,
+					{
+						permalink: anchor.permalink.headerLink(),
+					},
+				)
 				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
 				.use(mathjax3Pro);
 		}
