@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "@mdit/plugin-tab": "^0.23.0",
-    "markdown-exit": "^1.0.0-beta.6",
+    "markdown-exit": "^1.0.0-beta.7",
     "markdown-exit-mermaid": "^2.1.0",
     "markdown-exit-shiki": "^0.1.4",
     "markdown-it-abbr": "^2.0.0",
