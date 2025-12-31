@@ -13,7 +13,12 @@
     "build": "vite build",
     "fmt": "bunx biome check --write ."
   },
-  "author": "GnixAIj",
+  "author": "GnixAij",
+  "homepage": "https://github.com/Efterklang/hexo-renderer-markdown-exit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Efterklang/hexo-renderer-markdown-exit.git"
+  },
   "license": "MIT",
   "files": [
     "dist",
