@@ -12,23 +12,4 @@ interface MarkdownExitConfig {
 	disableNunjucks?: boolean;
 }
 
-interface AnchorOptions {
-	level: number;
-	permalinkClass: string;
-	permalinkSymbol: string;
-	permalinkSide: "left" | "right";
-	permalink: boolean;
-	case: number;
-	collisionSuffix: string;
-	renderPermalink?: (
-		slug: string,
-		opts: AnchorOptions,
-		tokens: Token[],
-		idx: number,
-		options: any,
-		env: any,
-		self: Renderer,
-	) => void;
-}
-
-export type { MarkdownExitConfig, AnchorOptions, PluginConfig, MermaidOptions };
+export type { MarkdownExitConfig, PluginConfig, MermaidOptions };
