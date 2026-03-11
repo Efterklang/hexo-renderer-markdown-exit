@@ -1,0 +1,71 @@
+name: Auto Release
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Determine release type
+        id: release
+        run: |
+          # Default to patch release
+          RELEASE_TYPE="patch"
+          LABELS="${{ join(github.event.pull_request.labels.*.name) }}"
+          
+          if echo "$LABELS" | grep -q "release:major"; then
+            RELEASE_TYPE="major"
+          elif echo "$LABELS" | grep -q "release:minor"; then
+            RELEASE_TYPE="minor"
+          elif echo "$LABELS" | grep -q "release:patch"; then
+            RELEASE_TYPE="patch"
+          fi
+          
+          echo "Release type: $RELEASE_TYPE"
+          echo "type=$RELEASE_TYPE" >> $GITHUB_OUTPUT
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install deps and build
+        run: |
+          bun install
+          bun run build
+
+      - name: Bump version and tag
+        run: |
+          VERSION=$(node -e "console.log(require('./package.json').version)")
+          echo "Current version: $VERSION"
+          
+          # Use npm version to bump
+          NEW_VERSION=$(npm version ${{ steps.release.outputs.type }} --no-git-tag-version 2>/dev/null | sed 's/v//')
+          echo "New version: $NEW_VERSION"
+          
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create git tag
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git commit -m "chore: bump version to ${{ steps.release.outputs.version }}" || echo "No changes to commit"
+          git tag -a "v${{ steps.release.outputs.version }}" -m "Release v${{ steps.release.outputs.version }}"
+
+      - name: Push tag
+        run: git push origin "v${{ steps.release.outputs.version }}"

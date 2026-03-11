@@ -1,0 +1,74 @@
+name: Dependency Update
+
+on:
+  schedule:
+    # Run every Monday at 6 AM UTC
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-and-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Check outdated dependencies
+        id: outdated
+        run: |
+          # Save current package versions
+          cp package.json package.json.bak
+          cp bun.lock bun.lock.bak
+
+          # Run bun update to get latest versions
+          bun update
+
+          # Compare and check if anything changed
+          if diff -q package.json package.json.bak > /dev/null 2>&1; then
+            echo "✅ All dependencies are up to date"
+            echo "has_updates=false" >> $GITHUB_OUTPUT
+          else
+            echo "📦 Updates found!"
+            # Show what changed
+            echo "Changes:" >> $GITHUB_STEP_SUMMARY
+            echo '```diff' >> $GITHUB_STEP_SUMMARY
+            diff -u package.json.bak package.json >> $GITHUB_STEP_SUMMARY || true
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            
+            echo "has_updates=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.outdated.outputs.has_updates == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(deps): update dependencies"
+          title: "chore(deps): update dependencies"
+          body: |
+            ## Dependency Updates
+
+            Automated dependency update PR.
+
+            ### Summary
+            This PR updates npm dependencies to their latest versions.
+
+            ---
+            *This PR was automatically created by the Dependency Update workflow.*
+          branch: dependency-updates
+          delete-branch: true
+          labels: |
+            dependencies
+            automated
