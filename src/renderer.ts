@@ -7,7 +7,6 @@ import mermaidDiagram from "markdown-exit-mermaid";
 import code from "markdown-exit-shiki";
 import abbr from "markdown-it-abbr";
 import anchor from "markdown-it-anchor";
-import { full as emoji } from "markdown-it-emoji";
 import footnote from "markdown-it-footnote";
 import ins from "markdown-it-ins";
 import mark from "markdown-it-mark";
@@ -54,8 +53,6 @@ export class MarkdownRenderer {
 		console.time("MarkdownExit: Load Default Plugins");
 		if (this.config.defaultPlugins !== false) {
 			this.md
-				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
-				.use(emoji)
 				.use(footnote)
 				.use(mark)
 				.use(sub)
