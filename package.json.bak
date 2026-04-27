@@ -1,0 +1,53 @@
+{
+  "name": "hexo-renderer-markdown-exit",
+  "version": "3.3.0",
+  "description": "A Hexo renderer plugin using markdown-exit",
+  "main": "dist/index.js",
+  "keywords": [
+    "hexo",
+    "renderer",
+    "markdown",
+    "markdown-exit"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "fmt": "bunx biome check --write ."
+  },
+  "author": "GnixAij",
+  "homepage": "https://github.com/Efterklang/hexo-renderer-markdown-exit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Efterklang/hexo-renderer-markdown-exit.git"
+  },
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "dependencies": {
+    "@mdit/plugin-tab": "^0.24.2",
+    "markdown-exit": "^1.0.0-beta.9",
+    "markdown-exit-mermaid": "^2.2.3",
+    "markdown-exit-shiki": "^0.3.2",
+    "markdown-it-abbr": "^2.0.0",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-ins": "^4.0.0",
+    "markdown-it-mark": "^4.0.0",
+    "markdown-it-mathjax3-pro": "^1.0.0",
+    "markdown-it-sub": "^2.0.0",
+    "markdown-it-sup": "^2.0.0",
+    "markdown-it-task-lists": "^2.1.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.12",
+    "@types/hexo": "^7.0.0",
+    "bun-types": "^1.3.12",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.8"
+  },
+  "peerDependencies": {
+    "hexo": "^8.1.1",
+    "hexo-util": "^4.0.0"
+  }
+}
