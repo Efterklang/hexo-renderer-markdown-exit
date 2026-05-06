@@ -4,13 +4,13 @@ import type Hexo from "hexo";
 import type { StoreFunctionData } from "hexo/dist/extend/renderer";
 import { createMarkdownExit, type MarkdownExit } from "markdown-exit";
 import mermaidDiagram from "markdown-exit-mermaid";
+import ratex from "markdown-exit-ratex";
 import code from "markdown-exit-shiki";
 import abbr from "markdown-it-abbr";
 import anchor from "markdown-it-anchor";
 import footnote from "markdown-it-footnote";
 import ins from "markdown-it-ins";
 import mark from "markdown-it-mark";
-import mathjax3Pro from "markdown-it-mathjax3-pro";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
 import taskLists from "markdown-it-task-lists";
@@ -62,6 +62,7 @@ export class MarkdownRenderer {
 				.use(taskLists)
 				.use(code, this.config.code_options)
 				.use(mermaidDiagram, this.config.mermaid_options)
+				.use(ratex, this.config.ratex_options)
 				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
 				.use(tab)
 				.use(
@@ -70,9 +71,7 @@ export class MarkdownRenderer {
 					{
 						permalink: anchor.permalink.headerLink(),
 					},
-				)
-				// @ts-expect-error: MarkdownExit is compatible with MarkdownIt at runtime but types mismatch
-				.use(mathjax3Pro);
+				);
 		}
 		console.timeEnd("MarkdownExit: Load Default Plugins");
 		console.time("MarkdownExit: Load User Plugins");

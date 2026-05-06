@@ -1,4 +1,5 @@
 import type { MarkdownExitOptions } from "markdown-exit";
+import type { MarkdownExitRatexOptions } from "markdown-exit-ratex";
 
 type PluginConfig = string | { name: string; options?: any };
 
@@ -9,6 +10,7 @@ interface MarkdownExitConfig {
 	code_options?: InlineCodeOptions;
 	anchor_options?: AnchorOptions;
 	mermaid_options?: MermaidOptions;
+	ratex_options?: MarkdownExitRatexOptions;
 	disableNunjucks?: boolean;
 }
 
